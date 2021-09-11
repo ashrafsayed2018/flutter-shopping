@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import "package:provider/provider.dart";
+import '../screens/cart_screen.dart';
 import '../widgets/products_grid.dart';
+import "../provider/cart.dart";
+import "../widgets/badge.dart";
+import "../widgets/app_drawer.dart";
 
 enum FilterOptions { favorites, all }
 
@@ -37,9 +42,22 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                   child: Text('عرض الكل'), value: FilterOptions.all)
             ],
             icon: const Icon(Icons.more_vert),
+          ),
+          Consumer<Cart>(
+            builder: (_, cart, ch) => Badge(
+              child: ch,
+              value: cart.itemCount.toString(),
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.shopping_cart),
+              onPressed: () {
+                Navigator.pushNamed(context, 'cartScreen');
+              },
+            ),
           )
         ],
       ),
+      drawer: AppDrawer(),
       body: ProductsGrid(_showOnlyFavorites),
     );
   }

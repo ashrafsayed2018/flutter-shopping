@@ -56,6 +56,26 @@ class ProductItem extends StatelessWidget {
             onPressed: () {
               cart.addItem(product.id!, product.title!, product.price!,
                   product.imageUrl!);
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Theme.of(context).primaryColorDark,
+                  elevation: 30,
+                  action: SnackBarAction(
+                    label: 'تراجع',
+                    textColor: Colors.white,
+                    onPressed: () {
+                      cart.removeSingleItem(product.id);
+                    },
+                  ),
+                  content: const Text(
+                    'تمت اضافة المنتج لكرت التسوق',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  duration: const Duration(seconds: 3),
+                ),
+              );
             },
             color: Theme.of(context).accentColor,
           ),

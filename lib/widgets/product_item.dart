@@ -33,16 +33,20 @@ class ProductItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: GridTileBar(
           backgroundColor: Colors.black87,
-          leading: Consumer<Product>(
-            builder: (ctx, product, child) => IconButton(
-              icon: Icon(
-                  product.isFavorite! ? Icons.favorite : Icons.favorite_border),
-              onPressed: () {
-                product.toggleFavoriteState();
-              },
-              color: Theme.of(context).primaryColor,
+          leading: SizedBox(
+            width: MediaQuery.of(context).size.width * .20,
+            child: Consumer<Product>(
+              builder: (ctx, product, child) => IconButton(
+                icon: Icon(product.isFavorite!
+                    ? Icons.favorite
+                    : Icons.favorite_border),
+                onPressed: () {
+                  product.toggleFavoriteState();
+                },
+                color: Theme.of(context).primaryColor,
+              ),
+              // child: Text('never changed'),
             ),
-            // child: Text('never changed'),
           ),
           title: Text(
             product.title!,
